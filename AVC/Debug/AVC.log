@@ -1,0 +1,5 @@
+﻿  avc_analyzer.cpp
+D:\workspace\VS\avc_analyzer\AVC\avc_analyzer.cpp(13,20): warning C4018: “<”: 有符号/无符号不匹配
+  stream.cpp
+  正在生成代码...
+  AVC.vcxproj -> D:\workspace\VS\avc_analyzer\AVC\Debug\AVC.exe

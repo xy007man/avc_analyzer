@@ -1,0 +1,2 @@
+D:\workspace\VS\avc_analyzer\AVC\Debug\AVC.exe
+D:\workspace\VS\avc_analyzer\AVC\Debug\AVC.pdb
