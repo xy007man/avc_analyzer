@@ -140,9 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="avc_analyzer.cpp" />
+    <ClCompile Include="nalu.cpp" />
     <ClCompile Include="stream.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="nalu.h" />
     <ClInclude Include="stream.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
