@@ -1,4 +1,3 @@
-
 #ifndef _NAUL_H_
 #define _NAUL_H_
 #include <cstdint>
