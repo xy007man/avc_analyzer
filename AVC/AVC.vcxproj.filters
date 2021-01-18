@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="global">
+      <UniqueIdentifier>{0cedeabe-de5c-47d5-b89d-8d172733e60d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stream.cpp">
@@ -24,6 +27,9 @@
     <ClCompile Include="nalu.cpp">
       <Filter>nalu</Filter>
     </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stream.h">
@@ -31,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="nalu.h">
       <Filter>nalu</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>global</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

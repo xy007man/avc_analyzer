@@ -77,13 +77,13 @@ void StreamFile::EBSPToSODB() {
 	if (m_nalu.size() < 3) {
 		return;
 	}
-
+	// È¥³ý¾ºÕùÂë0x03
 	auto it = m_nalu.begin();
 	while (it != m_nalu.end()) {
 		if (*it == 3 && *(it - 1) == 0 && *(it - 2) == 0) {
 			it = m_nalu.erase(it);
 			continue;
-		} 
+		}
 		it++;
 	}
 }

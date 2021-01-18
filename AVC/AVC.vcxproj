@@ -142,10 +142,12 @@
     <ClCompile Include="avc_analyzer.cpp" />
     <ClCompile Include="nalu.cpp" />
     <ClCompile Include="stream.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="nalu.h" />
     <ClInclude Include="stream.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
