@@ -30,6 +30,9 @@
     <ClCompile Include="utils.cpp">
       <Filter>global</Filter>
     </ClCompile>
+    <ClCompile Include="SeqParmSet.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stream.h">
@@ -40,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>global</Filter>
+    </ClInclude>
+    <ClInclude Include="SeqParmSet.h">
+      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

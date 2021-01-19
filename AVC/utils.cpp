@@ -3,7 +3,7 @@
 
 int GetBitByPos(uint8_t* buf, uint8_t& bytePos, uint8_t& bitPos)
 {
-	// 从每个字节的高位开始
+	// 从每个字节的高位开始(每个字节是小端序，字节中的bit是大端序)
 	uint8_t mask = 1 << (7 - bitPos);
 	int val = (mask & buf[bytePos]) != 0;
 
