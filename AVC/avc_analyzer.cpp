@@ -15,8 +15,8 @@ void testUE()
 
 int main(int argc, char* argv[])
 {	
-	//StreamFile avcFile(argv[1]);
-	//avcFile.ParseBitStream();
-	testUE();
+	StreamFile avcFile(argv[1]);
+	avcFile.ParseBitStream();
+	//testUE();
 	return 0;
 }

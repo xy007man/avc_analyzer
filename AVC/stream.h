@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cstdio>
+#include "SeqParmSet.h"
 
 class StreamFile
 {
@@ -13,8 +14,9 @@ public:
 	int FindNaul();
 	void EBSPToSODB();
 private:
-	FILE *m_inputFile;
-	std::vector<uint8_t> m_nalu;
+	FILE *inputFile;
+	std::vector<uint8_t> nalu;
+	SeqParmSet *sps;
 };
 
 #endif

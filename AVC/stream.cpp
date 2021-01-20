@@ -3,14 +3,20 @@
 #include "nalu.h"
 
 StreamFile::StreamFile(char* fileName) {
-	m_inputFile = fopen(fileName, "rb");
-	if (m_inputFile == NULL)
+	inputFile = fopen(fileName, "rb");
+	if (inputFile == NULL)
 		std::cout << "open file failed" << std::endl;
 }
 
 StreamFile::~StreamFile() {
-	if (m_inputFile)
-		fclose(m_inputFile);
+
+	if (inputFile) {
+		fclose(inputFile);
+	}
+
+	if (sps != nullptr) {
+		delete sps;
+	}
 }
 
 int StreamFile::ParseBitStream() {
@@ -18,11 +24,21 @@ int StreamFile::ParseBitStream() {
 
 	do {
 		ret = FindNaul();
-		if (m_nalu.size() > 0) {
-			int naulType = m_nalu[0] & 0x1f;
+		if (nalu.size() > 0) {
+			int naulType = nalu[0] & 0x1f;
 			EBSPToSODB();
 			printf("naul type %x\n", naulType);
-			NALU nalu(&m_nalu[1], m_nalu.size() - 1);
+
+			NALU nalu(&nalu[1], nalu.size() - 1);
+			switch (naulType)
+			{
+				case 7:
+					sps = new SeqParmSet();
+					nalu.parseSeqParmSet(sps);
+					break;
+				default:
+					break;
+			}
 		}
 	} while (!ret);
 
@@ -34,54 +50,54 @@ int StreamFile::FindNaul() {
 	uint8_t byteValue;
 	uint8_t prefix[3] = { 0 };
 
-	m_nalu.clear();
+	nalu.clear();
 	for (int i = 0; i < 3; i++) {
-		prefix[i] = fgetc(m_inputFile);
-		m_nalu.push_back(prefix[i]);
+		prefix[i] = fgetc(inputFile);
+		nalu.push_back(prefix[i]);
 		if (prefix[i] == EOF)
 			return -1;
 	}
 	
-	while (!feof(m_inputFile)) {
+	while (!feof(inputFile)) {
 
 		// 00 00 01
 		if (prefix[pos % 3] == 0 
 			&& prefix[(pos + 1) % 3] == 0 && prefix[(pos + 2) % 3] == 1) {
-			m_nalu.pop_back();
-			m_nalu.pop_back();
-			m_nalu.pop_back();
+			nalu.pop_back();
+			nalu.pop_back();
+			nalu.pop_back();
 			return 0;
 		}
 
 		// 00 00 00 01
 		if (prefix[pos % 3] == 0 
 			&& prefix[(pos + 1) % 3] == 0 && prefix[(pos + 2) % 3] == 0) {
-			if (fgetc(m_inputFile) == 1) {
-				m_nalu.pop_back();
-				m_nalu.pop_back();
-				m_nalu.pop_back();
+			if (fgetc(inputFile) == 1) {
+				nalu.pop_back();
+				nalu.pop_back();
+				nalu.pop_back();
 				return 0;
 			}
 		}
 
-		byteValue = fgetc(m_inputFile);
+		byteValue = fgetc(inputFile);
 		prefix[pos % 3] = byteValue;
 		pos++;
-		m_nalu.push_back(byteValue);
+		nalu.push_back(byteValue);
 	}
 
 	return -1;
 }
 
 void StreamFile::EBSPToSODB() {
-	if (m_nalu.size() < 3) {
+	if (nalu.size() < 3) {
 		return;
 	}
 	// È¥³ý¾ºÕùÂë0x03
-	auto it = m_nalu.begin();
-	while (it != m_nalu.end()) {
+	auto it = nalu.begin();
+	while (it != nalu.end()) {
 		if (*it == 3 && *(it - 1) == 0 && *(it - 2) == 0) {
-			it = m_nalu.erase(it);
+			it = nalu.erase(it);
 			continue;
 		}
 		it++;

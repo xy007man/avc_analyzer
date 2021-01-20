@@ -45,7 +45,7 @@
       <Filter>global</Filter>
     </ClInclude>
     <ClInclude Include="SeqParmSet.h">
-      <Filter>application</Filter>
+      <Filter>stream</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
