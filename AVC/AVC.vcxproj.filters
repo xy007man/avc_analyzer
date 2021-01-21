@@ -33,6 +33,9 @@
     <ClCompile Include="SeqParmSet.cpp">
       <Filter>stream</Filter>
     </ClCompile>
+    <ClCompile Include="PicParmSet.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stream.h">
@@ -46,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="SeqParmSet.h">
       <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="PicParmSet.h">
+      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
-#include <cstdint>
 #ifndef _SEQ_PARM_SET_H_
 #define _SEQ_PARM_SET_H_
-
+#include <cstdint>
 struct SeqParmSetFlag {
 	uint32_t residualColourTransformFlag : 1;
 	uint32_t qpprimeYZeroTransformBypassFlag : 1;
@@ -28,7 +27,7 @@ public:
 	void setPocType(uint8_t pocType);
 	void setMaxPocCnt(uint32_t maxPocCnt);
 	void setMaxNumRefFrames(uint32_t maxNumRefFrames);
-	void setSpsMultipleFlags(struct SeqParmSetFlag &spsFlag);
+	void setSpsMultipleFlags(SeqParmSetFlag &spsFlag);
 	void setPicReslutionInMbs(uint16_t widthInMBs, uint16_t picHeightInMapUnits);
 	void setFrameCropOffset(uint32_t offsets[4]);
 private:
@@ -36,7 +35,7 @@ private:
 	uint8_t levelIdc;
 	uint8_t spsId;
 
-	uint8_t chromaFormatIdc;
+	uint8_t chromaFormatIdc = 1;
 	uint8_t bitDepthLuma;
 	uint8_t bitDepthChroma;
 

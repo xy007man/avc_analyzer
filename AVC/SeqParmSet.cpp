@@ -2,7 +2,7 @@
 
 SeqParmSet::SeqParmSet()
 {
-
+	
 }
 SeqParmSet::~SeqParmSet()
 {
