@@ -17,6 +17,10 @@ StreamFile::~StreamFile() {
 	if (sps != nullptr) {
 		delete sps;
 	}
+
+	if (pps != nullptr) {
+		delete pps;
+	}
 }
 
 int StreamFile::ParseBitStream() {
@@ -35,6 +39,10 @@ int StreamFile::ParseBitStream() {
 				case 7:
 					sps = new SeqParmSet();
 					nalu.parseSeqParmSet(sps);
+					break;
+				case 8:
+					pps = new PicParmSet();
+					nalu.parsePicParmSet(pps);
 					break;
 				default:
 					break;

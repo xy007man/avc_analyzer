@@ -109,3 +109,58 @@ int NALU::parseSeqParmSet(SeqParmSet* sps)
 
 	return 0;
 }
+
+int NALU::parsePicParmSet(PicParmSet* picParmSet)
+{
+	uint8_t bytePos = 0;
+	uint8_t bitPos = 0;
+
+	uint8_t ppsId;
+	uint8_t spsId;
+
+	uint8_t numSliceGroups;
+	uint8_t numRefIdxl0Active;
+	uint8_t numRefIdxl1Active;
+
+	uint8_t weightedBipredIdc; // ¼ÓÈ¨Ô¤²âË÷Òý
+	int picInitQp;
+	int picInitQs;
+	int chromaQpIndexOffset;
+
+	struct PicParmSetFlag ppsFlag;
+
+	ppsId = GetUECode(pSODB, bytePos, bitPos);
+	spsId = GetUECode(pSODB, bytePos, bitPos);
+	ppsFlag.entropyCodingModeFlag = GetBitByPos(pSODB, bytePos, bitPos);
+	ppsFlag.picOrderPresentFlag = GetBitByPos(pSODB, bytePos, bitPos);
+	numSliceGroups = GetUECode(pSODB, bytePos, bitPos) + 1;
+
+	if (numSliceGroups > 1) {
+		return -1;
+	}
+
+	numRefIdxl0Active = GetUECode(pSODB, bytePos, bitPos) + 1;
+	numRefIdxl1Active = GetUECode(pSODB, bytePos, bitPos) + 1;
+	ppsFlag.weightedPredFlag = GetBitByPos(pSODB, bytePos, bitPos);
+	weightedBipredIdc = (GetBitByPos(pSODB, bytePos, bitPos) << 1) + 
+		GetBitByPos(pSODB, bytePos, bitPos);
+	picInitQp = GetSECode(pSODB, bytePos, bitPos) + 26;
+	picInitQs = GetSECode(pSODB, bytePos, bitPos) + 26;
+	chromaQpIndexOffset = GetSECode(pSODB, bytePos, bitPos);
+	ppsFlag.deblockingFilterControlPresentFlag = GetBitByPos(pSODB, bytePos, bitPos);
+	ppsFlag.constrainedIntraPredFlag = GetBitByPos(pSODB, bytePos, bitPos);
+	ppsFlag.redundantPicCntPresentFlag = GetBitByPos(pSODB, bytePos, bitPos);
+
+	picParmSet->setPpsId(ppsId);
+	picParmSet->setSpsId(spsId);
+	picParmSet->setNumSliceGroups(numSliceGroups);
+	picParmSet->setNumRefIdxl0Active(numRefIdxl0Active);
+	picParmSet->setNumRefIdxl1Active(numRefIdxl1Active);
+	picParmSet->setWeightedBipredIdc(weightedBipredIdc);
+	picParmSet->setPicInitQp(picInitQp);
+	picParmSet->setPicInitQs(picInitQs);
+	picParmSet->setChromaQpIndexOffset(chromaQpIndexOffset);
+	picParmSet->setPpsMultipleFlags(ppsFlag);
+
+	return 0;
+}

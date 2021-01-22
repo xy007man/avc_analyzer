@@ -27,7 +27,7 @@ int GetUECode(uint8_t* buf, uint8_t& bytePos, uint8_t& bitPos)
 	int surfixVal = 0;
 	uint8_t prefixZeroCount = 0;
 
-	assert(bytePos < 8);
+	assert(bitPos < 8);
 
 	// 找到第一个非0数字
 	while (GetBitByPos(buf, bytePos, bitPos) == 0) {
@@ -40,4 +40,12 @@ int GetUECode(uint8_t* buf, uint8_t& bytePos, uint8_t& bitPos)
 	}
 
 	return prefixVal + surfixVal;
+}
+
+int GetSECode(uint8_t* buf, uint8_t& bytePos, uint8_t& bitPos)
+{
+	int ue = GetUECode(buf, bytePos, bitPos);
+	int sign = (ue % 2) ? 1 : -1;
+
+	return sign * ((ue + 1) >> 1);
 }
