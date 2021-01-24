@@ -14,17 +14,18 @@ struct PicParmSetFlag {
 class PicParmSet
 {
 public:
-	void setPpsId(uint8_t ppsId);
-	void setSpsId(uint8_t spsId);
-	void setNumSliceGroups(uint8_t numSliceGroups);
-	void setNumRefIdxl0Active(uint8_t numRefIdxl0Active);
-	void setNumRefIdxl1Active(uint8_t numRefIdxl1Active);
-	void setWeightedBipredIdc(uint8_t weightedBipredIdc);
-	void setPicInitQp(int picInitQp);
-	void setPicInitQs(int picInitQs);
-	void setChromaQpIndexOffset(int chromaQpIndexOffset);
-	void setPpsMultipleFlags(PicParmSetFlag& ppsFlag);
-
+	void SetPpsId(uint8_t ppsId);
+	void SetSpsId(uint8_t spsId);
+	void SetNumSliceGroups(uint8_t numSliceGroups);
+	void SetNumRefIdxl0Active(uint8_t numRefIdxl0Active);
+	void SetNumRefIdxl1Active(uint8_t numRefIdxl1Active);
+	void SetWeightedBipredIdc(uint8_t weightedBipredIdc);
+	void SetPicInitQp(int picInitQp);
+	void SetPicInitQs(int picInitQs);
+	void SetChromaQpIndexOffset(int chromaQpIndexOffset);
+	void SetPpsMultipleFlags(PicParmSetFlag& ppsFlag);
+	bool GetRedundantPicCntPresentFlag();
+	bool GetPicOrderPresentFlag();
 private:
 	uint8_t ppsId;
 	uint8_t spsId;

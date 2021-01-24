@@ -2,7 +2,7 @@
 #include "stream.h"
 #include "nalu.h"
 
-StreamFile::StreamFile(char* fileName) {
+StreamFile::StreamFile(char* fileName) : sps(nullptr), pps(nullptr) {
 	inputFile = fopen(fileName, "rb");
 	if (inputFile == NULL)
 		std::cout << "open file failed" << std::endl;
@@ -21,6 +21,10 @@ StreamFile::~StreamFile() {
 	if (pps != nullptr) {
 		delete pps;
 	}
+
+	if (iSlice != nullptr) {
+		delete iSlice;
+	}
 }
 
 int StreamFile::ParseBitStream() {
@@ -38,11 +42,15 @@ int StreamFile::ParseBitStream() {
 			{
 				case 7:
 					sps = new SeqParmSet();
-					nalu.parseSeqParmSet(sps);
+					nalu.ParseSeqParmSet(sps);
 					break;
 				case 8:
 					pps = new PicParmSet();
-					nalu.parsePicParmSet(pps);
+					nalu.ParsePicParmSet(pps);
+					break;
+				case 5:
+					iSlice = new ISlice(nalu.GetSODB(), sps, pps, naulType);
+					iSlice->ParseSlice();
 					break;
 				default:
 					break;

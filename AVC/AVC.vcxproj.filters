@@ -16,6 +16,9 @@
     <Filter Include="global">
       <UniqueIdentifier>{0cedeabe-de5c-47d5-b89d-8d172733e60d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="slice">
+      <UniqueIdentifier>{7aba9da4-bb1c-4a0a-8c1a-f30e4d4fdec5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stream.cpp">
@@ -36,6 +39,12 @@
     <ClCompile Include="PicParmSet.cpp">
       <Filter>stream</Filter>
     </ClCompile>
+    <ClCompile Include="ISlice.cpp">
+      <Filter>slice</Filter>
+    </ClCompile>
+    <ClCompile Include="SliceHeader.cpp">
+      <Filter>slice</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stream.h">
@@ -50,8 +59,14 @@
     <ClInclude Include="SeqParmSet.h">
       <Filter>stream</Filter>
     </ClInclude>
+    <ClInclude Include="ISlice.h">
+      <Filter>slice</Filter>
+    </ClInclude>
+    <ClInclude Include="SliceHeader.h">
+      <Filter>slice</Filter>
+    </ClInclude>
     <ClInclude Include="PicParmSet.h">
-      <Filter>application</Filter>
+      <Filter>stream</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

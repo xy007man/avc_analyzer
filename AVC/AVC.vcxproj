@@ -140,16 +140,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="avc_analyzer.cpp" />
+    <ClCompile Include="ISlice.cpp" />
     <ClCompile Include="nalu.cpp" />
     <ClCompile Include="PicParmSet.cpp" />
     <ClCompile Include="SeqParmSet.cpp" />
+    <ClCompile Include="SliceHeader.cpp" />
     <ClCompile Include="stream.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ISlice.h" />
     <ClInclude Include="nalu.h" />
     <ClInclude Include="PicParmSet.h" />
     <ClInclude Include="SeqParmSet.h" />
+    <ClInclude Include="SliceHeader.h" />
     <ClInclude Include="stream.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>

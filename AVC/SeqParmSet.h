@@ -16,20 +16,22 @@ struct SeqParmSetFlag {
 class SeqParmSet
 {
 public:
-	SeqParmSet();
-	~SeqParmSet();
-	void setProfileLevel(uint8_t profileIdc, uint8_t levelIdc);
-	void setSpsId(uint8_t spsId);
-	void setChromaFormatIdc(uint8_t chromaFormatIdc);
-	void setBitDepth(uint8_t bitDepthLuma, uint8_t bitDepthChroma);
+	void SetProfileLevel(uint8_t profileIdc, uint8_t levelIdc);
+	void SetSpsId(uint8_t spsId);
+	void SetChromaFormatIdc(uint8_t chromaFormatIdc);
+	void SetBitDepth(uint8_t bitDepthLuma, uint8_t bitDepthChroma);
 	
-	void setMaxFrameNum(uint32_t maxFrameNum);
-	void setPocType(uint8_t pocType);
-	void setMaxPocCnt(uint32_t maxPocCnt);
-	void setMaxNumRefFrames(uint32_t maxNumRefFrames);
-	void setSpsMultipleFlags(SeqParmSetFlag &spsFlag);
-	void setPicReslutionInMbs(uint16_t widthInMBs, uint16_t picHeightInMapUnits);
-	void setFrameCropOffset(uint32_t offsets[4]);
+	void SetLog2MaxFrameNum(uint32_t maxFrameNum);
+	void SetPocType(uint8_t pocType);
+	void SetLog2MaxPocCnt(uint32_t maxLog2PocCnt);
+	void SetMaxNumRefFrames(uint32_t maxNumRefFrames);
+	void SetSpsMultipleFlags(SeqParmSetFlag &spsFlag);
+	void SetPicReslutionInMbs(uint16_t widthInMBs, uint16_t picHeightInMapUnits);
+	void SetFrameCropOffset(uint32_t offsets[4]);
+	uint32_t GetLog2MaxFrameNum();
+	bool GetFrameMBsOnlyFlag();
+	uint8_t GetPocType();
+	uint32_t GetLog2MaxLog2PocCnt();
 private:
 	uint8_t profileIdc;
 	uint8_t levelIdc;
@@ -39,9 +41,9 @@ private:
 	uint8_t bitDepthLuma;
 	uint8_t bitDepthChroma;
 
-	uint32_t maxFrameNum;
+	uint32_t log2MaxFrameNum;
 	uint8_t pocType;
-	uint32_t maxPocCnt;
+	uint32_t maxLog2PocCnt;
 	uint32_t maxNumRefFrames;
 	uint16_t picWidthInMBs; // picWith = 16 * picWidthInMbs
 	uint16_t picHeightInMapUnits;

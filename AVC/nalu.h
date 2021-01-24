@@ -8,8 +8,9 @@ class NALU {
 public:
 	NALU(uint8_t *pSODB, uint32_t length);
 	~NALU();
-	int parseSeqParmSet(SeqParmSet *seqParmSet);
-	int parsePicParmSet(PicParmSet* picParmSet);
+	uint8_t *GetSODB();
+	int ParseSeqParmSet(SeqParmSet *sps);
+	int ParsePicParmSet(PicParmSet* pps);
 private:
 	uint8_t *pSODB;
 	uint32_t length;

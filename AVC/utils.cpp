@@ -49,3 +49,12 @@ int GetSECode(uint8_t* buf, uint8_t& bytePos, uint8_t& bitPos)
 
 	return sign * ((ue + 1) >> 1);
 }
+
+uint32_t GetUINTCode(uint8_t* buf, uint8_t& bytePos, uint8_t& bitPos, uint32_t length)
+{
+	uint32_t val = 0;
+	for (int i = 0; i < length; i++) {
+		val += GetBitByPos(buf, bytePos, bitPos) << (length - 1 - i);
+	}
+	return val;
+}

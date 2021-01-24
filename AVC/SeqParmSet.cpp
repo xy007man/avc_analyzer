@@ -1,70 +1,83 @@
 #include "SeqParmSet.h"
 
-SeqParmSet::SeqParmSet()
-{
-	
-}
-SeqParmSet::~SeqParmSet()
-{
-}
-
-void SeqParmSet::setProfileLevel(uint8_t profileIdc, uint8_t levelIdc)
+void SeqParmSet::SetProfileLevel(uint8_t profileIdc, uint8_t levelIdc)
 {
 	this->profileIdc = profileIdc;
 	this->levelIdc = levelIdc;
 }
 
-void SeqParmSet::setSpsId(uint8_t spsId)
+void SeqParmSet::SetSpsId(uint8_t spsId)
 {
 	this->spsId = spsId;
 }
 
-void SeqParmSet::setChromaFormatIdc(uint8_t chromaFormatIdc)
+void SeqParmSet::SetChromaFormatIdc(uint8_t chromaFormatIdc)
 {
 	this->chromaFormatIdc = chromaFormatIdc;
 }
 
-void SeqParmSet::setBitDepth(uint8_t bitDepthLuma, uint8_t bitDepthChroma)
+void SeqParmSet::SetBitDepth(uint8_t bitDepthLuma, uint8_t bitDepthChroma)
 {
 	this->bitDepthLuma = bitDepthLuma;
 	this->bitDepthChroma = bitDepthChroma;
 }
 
-void SeqParmSet::setMaxFrameNum(uint32_t maxFrameNum)
+void SeqParmSet::SetLog2MaxFrameNum(uint32_t log2MaxFrameNum)
 {
-	this->maxFrameNum = maxFrameNum;
+	this->log2MaxFrameNum = log2MaxFrameNum;
 }
 
-void SeqParmSet::setPocType(uint8_t pocType)
+void SeqParmSet::SetPocType(uint8_t pocType)
 {
 	this->pocType = pocType;
 }
 
-void SeqParmSet::setMaxPocCnt(uint32_t maxPocCnt)
+void SeqParmSet::SetLog2MaxPocCnt(uint32_t maxLog2PocCnt)
 {
-	this->maxPocCnt = maxPocCnt;
+	this->maxLog2PocCnt = maxLog2PocCnt;
 }
 
-void SeqParmSet::setMaxNumRefFrames(uint32_t maxNumRefFrames)
+void SeqParmSet::SetMaxNumRefFrames(uint32_t maxNumRefFrames)
 {
 	this->maxNumRefFrames = maxNumRefFrames;
 }
 
-void SeqParmSet::setSpsMultipleFlags(struct SeqParmSetFlag &spsFlag)
+void SeqParmSet::SetSpsMultipleFlags(struct SeqParmSetFlag &spsFlag)
 {
 	this->spsFlag = spsFlag;
 }
 
-void SeqParmSet::setPicReslutionInMbs(uint16_t widthInMBs, uint16_t picHeightInMapUnits)
+void SeqParmSet::SetPicReslutionInMbs(uint16_t widthInMBs, uint16_t picHeightInMapUnits)
 {
 	this->picWidthInMBs = picWidthInMBs;
 	this->picHeightInMapUnits = picHeightInMapUnits;
 	this->picHeightInMBs = this->spsFlag.frameMBsOnlyFlag ? this->picHeightInMapUnits : 2 * this->picHeightInMapUnits;
 }
 
-void SeqParmSet::setFrameCropOffset(uint32_t offsets[4])
+void SeqParmSet::SetFrameCropOffset(uint32_t offsets[4])
 {
 	for (int i = 0; i < 4; i++) {
 		this->frameCropOffset[i] = offsets[i];
 	}
 }
+
+uint32_t SeqParmSet::GetLog2MaxFrameNum()
+{
+	return log2MaxFrameNum;
+}
+
+bool SeqParmSet::GetFrameMBsOnlyFlag()
+{
+	return spsFlag.frameMBsOnlyFlag;
+}
+
+uint8_t SeqParmSet::GetPocType()
+{
+	return pocType;
+}
+
+uint32_t SeqParmSet::GetLog2MaxLog2PocCnt()
+{
+	return maxLog2PocCnt;
+}
+
