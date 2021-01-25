@@ -17,6 +17,7 @@ private:
 	SeqParmSet *sps;
 	PicParmSet *pps;
 	SliceHeader *sliceHeader;
+	uint16_t maxMBNum;
 };
 #endif
 

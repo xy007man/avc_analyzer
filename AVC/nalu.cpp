@@ -89,7 +89,6 @@ int NALU::ParseSeqParmSet(SeqParmSet* sps)
 
 	picWidthInMBs = GetUECode(pSODB, bytePos, bitPos) + 1;
 	picHeightInMapUnits = GetUECode(pSODB, bytePos, bitPos) + 1;
-	sps->SetPicReslutionInMbs(picWidthInMBs, picHeightInMapUnits);
 
 	spsFlag.frameMBsOnlyFlag = GetBitByPos(pSODB, bytePos, bitPos);
 	if (!spsFlag.frameMBsOnlyFlag) {
@@ -111,6 +110,7 @@ int NALU::ParseSeqParmSet(SeqParmSet* sps)
 		return -1; // TODO:
 	}
 	sps->SetSpsMultipleFlags(spsFlag);
+	sps->SetPicReslutionInMbs(picWidthInMBs, picHeightInMapUnits);
 
 	return 0;
 }

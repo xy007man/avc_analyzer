@@ -1,9 +1,2 @@
-﻿  ISlice.cpp
-  PicParmSet.cpp
-  SeqParmSet.cpp
-  SliceHeader.cpp
-  avc_analyzer.cpp
-  nalu.cpp
-  stream.cpp
-  正在生成代码...
+﻿  MacroBlock.cpp
   AVC.vcxproj -> D:\workspace\VS\avc_analyzer\AVC\Debug\AVC.exe

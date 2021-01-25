@@ -32,6 +32,8 @@ public:
 	bool GetFrameMBsOnlyFlag();
 	uint8_t GetPocType();
 	uint32_t GetLog2MaxLog2PocCnt();
+	uint16_t GetPicWidthInMBs();
+	uint16_t GetPicHeightInMBs();
 private:
 	uint8_t profileIdc;
 	uint8_t levelIdc;

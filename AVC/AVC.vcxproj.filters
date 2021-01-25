@@ -19,6 +19,9 @@
     <Filter Include="slice">
       <UniqueIdentifier>{7aba9da4-bb1c-4a0a-8c1a-f30e4d4fdec5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MacroBlock">
+      <UniqueIdentifier>{c2ee071b-951e-4475-ab7c-63ad78e7624e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stream.cpp">
@@ -45,6 +48,9 @@
     <ClCompile Include="SliceHeader.cpp">
       <Filter>slice</Filter>
     </ClCompile>
+    <ClCompile Include="MacroBlock.cpp">
+      <Filter>MacroBlock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stream.h">
@@ -67,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="PicParmSet.h">
       <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroBlock.h">
+      <Filter>MacroBlock</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

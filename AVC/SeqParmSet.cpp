@@ -49,7 +49,7 @@ void SeqParmSet::SetSpsMultipleFlags(struct SeqParmSetFlag &spsFlag)
 
 void SeqParmSet::SetPicReslutionInMbs(uint16_t widthInMBs, uint16_t picHeightInMapUnits)
 {
-	this->picWidthInMBs = picWidthInMBs;
+	this->picWidthInMBs = widthInMBs;
 	this->picHeightInMapUnits = picHeightInMapUnits;
 	this->picHeightInMBs = this->spsFlag.frameMBsOnlyFlag ? this->picHeightInMapUnits : 2 * this->picHeightInMapUnits;
 }
@@ -79,5 +79,15 @@ uint8_t SeqParmSet::GetPocType()
 uint32_t SeqParmSet::GetLog2MaxLog2PocCnt()
 {
 	return maxLog2PocCnt;
+}
+
+uint16_t SeqParmSet::GetPicWidthInMBs()
+{
+	return picWidthInMBs;
+}
+
+uint16_t SeqParmSet::GetPicHeightInMBs()
+{
+	return picHeightInMBs;
 }
 

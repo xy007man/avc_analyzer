@@ -3,6 +3,7 @@
 ISlice::ISlice(uint8_t* pSODB, SeqParmSet* sps, PicParmSet* pps, int naulType)
 	:pSODB(pSODB), sps(sps), pps(pps), naulType(naulType), sliceHeader(nullptr)
 {
+	maxMBNum = sps->GetPicHeightInMBs() * sps->GetPicWidthInMBs();
 }
 
 ISlice::~ISlice()
