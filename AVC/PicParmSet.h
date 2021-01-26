@@ -26,6 +26,7 @@ public:
 	void SetPpsMultipleFlags(PicParmSetFlag& ppsFlag);
 	bool GetRedundantPicCntPresentFlag();
 	bool GetPicOrderPresentFlag();
+	bool GetTransform8x8ModeFlag();
 private:
 	uint8_t ppsId;
 	uint8_t spsId;

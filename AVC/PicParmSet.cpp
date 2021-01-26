@@ -59,3 +59,8 @@ bool PicParmSet::GetPicOrderPresentFlag()
 {
 	return ppsFlag.picOrderPresentFlag;
 }
+
+bool PicParmSet::GetTransform8x8ModeFlag()
+{
+	return false;
+}

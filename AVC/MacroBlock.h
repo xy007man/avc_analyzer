@@ -1,6 +1,7 @@
 #ifndef _MACRO_BLOCK_H_
 #define _MACRO_BLOCK_H_
 #include <cstdint>
+#include "PicParmSet.h"
 
 struct IntraPred
 {
@@ -12,19 +13,21 @@ struct IntraPred
 class MacroBlock
 {
 public:
-	MacroBlock(uint8_t *pSODB, uint32_t offset);
+	MacroBlock(uint8_t *pSODB, uint8_t offset, PicParmSet *pps);
 	~MacroBlock();
+	int ParseMacroBlock();
 private:
-	uint8_t* pSODB;
-	uint32_t byteOffset;
-	uint32_t bitOffset;
-	uint8_t mbType;
-	bool transformSize8x8Flag;
-	uint8_t codedBlockPattern;
-	uint8_t mbQpDelta;
+	uint8_t *pSODB;
+	uint8_t byteOffset;
+	uint8_t bitOffset;
+	uint8_t mbType = 0;
+	bool transformSize8x8Flag = false;
+	uint8_t codedBlockPattern = 0;
+	uint8_t mbQpDelta = 0;
 
-	IntraPred* intraPred;
-	uint8_t intraChromaPredMode;
+	IntraPred *intraPred = nullptr;
+	PicParmSet *pps = nullptr;
+	uint8_t intraChromaPredMode = 0;
 };
 #endif
 

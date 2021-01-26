@@ -4,6 +4,7 @@
 #include "SeqParmSet.h"
 #include "PicParmSet.h"
 #include "SliceHeader.h"
+#include "MacroBlock.h"
 
 class ISlice
 {
@@ -18,6 +19,8 @@ private:
 	PicParmSet *pps;
 	SliceHeader *sliceHeader;
 	uint16_t maxMBNum;
+
+	MacroBlock **mbs;
 };
 #endif
 
