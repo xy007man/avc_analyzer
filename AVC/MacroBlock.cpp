@@ -2,12 +2,14 @@
 #include "PicParmSet.h"
 #include "utils.h"
 
-MacroBlock::MacroBlock(uint8_t* pSODB, uint8_t offset, PicParmSet* pps)
+MacroBlock::MacroBlock(uint8_t* pSODB, uint8_t mbIdx, uint8_t offset, PicParmSet* pps)
 {
 	this->pSODB = pSODB;
-	byteOffset = offset / 8;
-	bitOffset = offset % 8;
+	this->byteOffset = offset / 8;
+	this->bitOffset = offset % 8;
 	this->pps = pps;
+	this->mbIdx = mbIdx;
+	this->mbSize = offset;
 }
 
 MacroBlock::~MacroBlock()
@@ -34,7 +36,7 @@ int MacroBlock::ParseMacroBlock()
 			for (int luma8x8BlkIdx = 0; luma8x8BlkIdx < 4; luma8x8BlkIdx++) {
 				intraPred[luma8x8BlkIdx].is8x8blockMode = false;
 				intraPred[luma8x8BlkIdx].prevIntraPredModeFlag = GetBitByPos(pSODB, byteOffset, bitOffset);
-				if (intraPred[luma8x8BlkIdx].prevIntraPredModeFlag) {
+				if (!intraPred[luma8x8BlkIdx].prevIntraPredModeFlag) {
 					intraPred[luma8x8BlkIdx].remIntraPredMode = GetUINTCode(pSODB, byteOffset, bitOffset, 3);
 				}
 			}
@@ -46,7 +48,7 @@ int MacroBlock::ParseMacroBlock()
 			for (int luma4x4BlkIdx = 0; luma4x4BlkIdx < 16; luma4x4BlkIdx++) {
 				intraPred[luma4x4BlkIdx].is8x8blockMode = false;
 				intraPred[luma4x4BlkIdx].prevIntraPredModeFlag = GetBitByPos(pSODB, byteOffset, bitOffset);
-				if (intraPred[luma4x4BlkIdx].prevIntraPredModeFlag) {
+				if (!intraPred[luma4x4BlkIdx].prevIntraPredModeFlag) {
 					intraPred[luma4x4BlkIdx].remIntraPredMode = GetUINTCode(pSODB, byteOffset, bitOffset, 3);
 				}
 			}
@@ -57,7 +59,17 @@ int MacroBlock::ParseMacroBlock()
 		// Intra 16x16
 	}
 
+	if (mbType == 0 || mbType == 25) {
+		codedBlockPattern = GetMECode(pSODB, byteOffset, bitOffset);
+		cbpLuma = codedBlockPattern % 16;
+		cbpChroma = codedBlockPattern / 16;
+	}
 
+	if (cbpLuma > 0 || cbpChroma > 0 || (mbType > 0 && mbType < 25)) {
+		mbQpDelta = GetSECode(pSODB, byteOffset, bitOffset);
+	}
 
-	return 0;
+	mbSize = byteOffset * 8 + bitOffset - mbSize;
+
+	return mbSize;
 }

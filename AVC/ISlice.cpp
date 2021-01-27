@@ -33,7 +33,7 @@ int ISlice::ParseSlice()
 	}
 	macroBlockOffset = bitLength;
 	for (int i = 0; i < maxMBNum; i++) {
-		mbs[i] = new MacroBlock(pSODB, macroBlockOffset, pps);
+		mbs[i] = new MacroBlock(pSODB, i, macroBlockOffset, pps);
 		bitLength = mbs[i]->ParseMacroBlock();
 		if (bitLength <= 0) {
 			return -1;
