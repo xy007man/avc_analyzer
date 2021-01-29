@@ -1,6 +1,2 @@
-﻿  ISlice.cpp
-  MacroBlock.cpp
-  avc_analyzer.cpp
-  stream.cpp
-  正在生成代码...
+﻿  avc_analyzer.cpp
   AVC.vcxproj -> D:\workspace\VS\avc_analyzer\AVC\Debug\AVC.exe
