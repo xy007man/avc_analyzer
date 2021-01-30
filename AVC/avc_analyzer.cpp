@@ -130,7 +130,37 @@ int GetTotalZerosRunBefore(const int coeff[16], int* runBefore, int* zeroLeft, i
 	return totalZeros;
 }
 
-std::string Encoding16x16Cavlc(const int coeff[16])
+std::string EncodeLevel(int level, int& suffixLength)
+{
+	std::string code;
+	int levelCode;
+
+	if (level > 0) {
+		levelCode = (level << 1) - 2;
+	}
+	else {
+		levelCode = -(level << 1) - 1;
+	}
+
+	int levelPrefix = levelCode / (1 << suffixLength);
+	int levelSuffix = levelCode % (1 << suffixLength);
+	for (int idx = 0; idx < levelPrefix; idx++) {
+		code += "0";
+	}
+	code += "1";
+
+	for (int idx = 0; idx < suffixLength; idx++) {
+		if ((levelSuffix >> (suffixLength - idx - 1) & 1) == 1) {
+			code += "1";
+		} else {
+			code += "0";
+		}
+	}
+
+	return code;
+}
+
+std::string Encode16x16Cavlc(const int coeff[16])
 {
 	std::string cavlcCode;
 	int totalCoeffs = GetTotalCoeffs(coeff); // 非0系数
@@ -168,6 +198,30 @@ std::string Encoding16x16Cavlc(const int coeff[16])
 		cavlcCode += trailingSign[i] == 1 ? "0" : "1";
 	}
 
+	// level
+	int suffixLength = 0;
+	if (totalCoeffs > 10 && trailingOnes < 3) {
+		suffixLength = 1;
+	}
+
+	for (int i = 0; i < levelCnt; i++) {
+		cavlcCode += EncodeLevel(level[i], suffixLength);
+		if ((abs(level[i]) > (suffixLength == 0 ? 0 : (3 << (suffixLength - 1)))) && suffixLength < 6) {
+			suffixLength++;
+		}
+	}
+
+	// totalZeros
+	cavlcCode += totalZerosMap[totalZeros][totalCoeffs];
+
+	// runBefore
+	for (int i = 0; i < totalCoeffs - 1; i++) {
+		if (zeroLeft[i] == 0) {
+			break;
+		}
+		cavlcCode += runBeforeMap[runBefore[i]][zeroLeft[i]];
+	}
+
 	delete[] level;
 	delete[] runBefore;
 	delete[] zeroLeft;
@@ -178,7 +232,7 @@ void testCAVLC()
 {
 	// 低频 --> 高频
 	int coeff[16] = { 3, 2, 1, -1, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 };
-	std::string cavlcCode = Encoding16x16Cavlc(coeff);
+	std::string cavlcCode = Encode16x16Cavlc(coeff);
 	std::cout << cavlcCode << std::endl;
 }
 
