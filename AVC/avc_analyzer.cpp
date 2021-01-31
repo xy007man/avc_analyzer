@@ -238,10 +238,10 @@ void testCAVLC()
 
 int main(int argc, char* argv[])
 {	
-	//StreamFile avcFile(argv[1]);
-	//avcFile.ParseBitStream();
+	StreamFile avcFile(argv[1]);
+	avcFile.ParseBitStream();
 	//testUE();
-	testCAVLC();
+	//testCAVLC();
 
 	return 0;
 }

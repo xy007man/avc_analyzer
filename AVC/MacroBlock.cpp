@@ -1,5 +1,6 @@
 #include "MacroBlock.h"
 #include "PicParmSet.h"
+#include "Residual.h"
 #include "utils.h"
 
 MacroBlock::MacroBlock(uint8_t* pSODB, uint8_t mbIdx, uint8_t offset, PicParmSet* pps)
@@ -16,6 +17,10 @@ MacroBlock::~MacroBlock()
 {
 	if (intraPred != nullptr) {
 		delete intraPred;
+	}
+
+	if (residual != nullptr) {
+		delete residual;
 	}
 }
 
@@ -67,6 +72,8 @@ int MacroBlock::ParseMacroBlock()
 
 	if (cbpLuma > 0 || cbpChroma > 0 || (mbType > 0 && mbType < 25)) {
 		mbQpDelta = GetSECode(pSODB, byteOffset, bitOffset);
+		residual = new Residual(pSODB, byteOffset * 8 + bitOffset, this);
+		residual->ParseMacroBlockResidual();
 	}
 
 	mbSize = byteOffset * 8 + bitOffset - mbSize;

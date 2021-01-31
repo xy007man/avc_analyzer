@@ -1,81 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="stream">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="MacroBlock">
+      <UniqueIdentifier>{c2ee071b-951e-4475-ab7c-63ad78e7624e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="application">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Residual">
+      <UniqueIdentifier>{e5ca4a9b-bba3-4c43-81f5-323011c54fb7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="nalu">
+    <Filter Include="Slice">
+      <UniqueIdentifier>{7aba9da4-bb1c-4a0a-8c1a-f30e4d4fdec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Nalu">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="global">
+    <Filter Include="Global">
       <UniqueIdentifier>{0cedeabe-de5c-47d5-b89d-8d172733e60d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="slice">
-      <UniqueIdentifier>{7aba9da4-bb1c-4a0a-8c1a-f30e4d4fdec5}</UniqueIdentifier>
+    <Filter Include="Stream">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="MacroBlock">
-      <UniqueIdentifier>{c2ee071b-951e-4475-ab7c-63ad78e7624e}</UniqueIdentifier>
+    <Filter Include="Application">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stream.cpp">
-      <Filter>stream</Filter>
+      <Filter>Stream</Filter>
     </ClCompile>
     <ClCompile Include="avc_analyzer.cpp">
-      <Filter>application</Filter>
+      <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="nalu.cpp">
-      <Filter>nalu</Filter>
+      <Filter>Nalu</Filter>
     </ClCompile>
     <ClCompile Include="utils.cpp">
-      <Filter>global</Filter>
+      <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="SeqParmSet.cpp">
-      <Filter>stream</Filter>
+      <Filter>Stream</Filter>
     </ClCompile>
     <ClCompile Include="PicParmSet.cpp">
-      <Filter>stream</Filter>
+      <Filter>Stream</Filter>
     </ClCompile>
     <ClCompile Include="ISlice.cpp">
-      <Filter>slice</Filter>
+      <Filter>Slice</Filter>
     </ClCompile>
     <ClCompile Include="SliceHeader.cpp">
-      <Filter>slice</Filter>
+      <Filter>Slice</Filter>
     </ClCompile>
     <ClCompile Include="MacroBlock.cpp">
       <Filter>MacroBlock</Filter>
     </ClCompile>
+    <ClCompile Include="Residual.cpp">
+      <Filter>Residual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stream.h">
-      <Filter>stream</Filter>
+      <Filter>Stream</Filter>
     </ClInclude>
     <ClInclude Include="nalu.h">
-      <Filter>nalu</Filter>
+      <Filter>Nalu</Filter>
     </ClInclude>
     <ClInclude Include="utils.h">
-      <Filter>global</Filter>
+      <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="SeqParmSet.h">
-      <Filter>stream</Filter>
+      <Filter>Stream</Filter>
     </ClInclude>
     <ClInclude Include="ISlice.h">
-      <Filter>slice</Filter>
+      <Filter>Slice</Filter>
     </ClInclude>
     <ClInclude Include="SliceHeader.h">
-      <Filter>slice</Filter>
+      <Filter>Slice</Filter>
     </ClInclude>
     <ClInclude Include="PicParmSet.h">
-      <Filter>stream</Filter>
+      <Filter>Stream</Filter>
     </ClInclude>
     <ClInclude Include="MacroBlock.h">
       <Filter>MacroBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="Residual.h">
+      <Filter>Residual</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

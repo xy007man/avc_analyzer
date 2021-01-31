@@ -3,6 +3,7 @@
 #include <cstdint>
 #include "PicParmSet.h"
 
+class Residual;
 struct IntraPred
 {
 	bool is8x8blockMode = false; // 4x4 or 8x8
@@ -32,6 +33,8 @@ private:
 	uint8_t intraChromaPredMode = 0;
 	uint8_t cbpLuma = 0;
 	uint8_t cbpChroma = 0;
+
+	Residual* residual = nullptr;
 };
 #endif
 

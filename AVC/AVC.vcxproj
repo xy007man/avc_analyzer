@@ -144,6 +144,7 @@
     <ClCompile Include="MacroBlock.cpp" />
     <ClCompile Include="nalu.cpp" />
     <ClCompile Include="PicParmSet.cpp" />
+    <ClCompile Include="Residual.cpp" />
     <ClCompile Include="SeqParmSet.cpp" />
     <ClCompile Include="SliceHeader.cpp" />
     <ClCompile Include="stream.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="MacroBlock.h" />
     <ClInclude Include="nalu.h" />
     <ClInclude Include="PicParmSet.h" />
+    <ClInclude Include="Residual.h" />
     <ClInclude Include="SeqParmSet.h" />
     <ClInclude Include="SliceHeader.h" />
     <ClInclude Include="stream.h" />
