@@ -24,6 +24,21 @@ MacroBlock::~MacroBlock()
 	}
 }
 
+uint8_t MacroBlock::GetCbpLuma()
+{
+	return this->cbpLuma;
+}
+
+uint8_t MacroBlock::GetCbpChroma()
+{
+	return this->cbpChroma;
+}
+
+PicParmSet* MacroBlock::GetPps()
+{
+	return this->pps;
+}
+
 int MacroBlock::ParseMacroBlock()
 {
 	mbType = GetUECode(pSODB, byteOffset, bitOffset);

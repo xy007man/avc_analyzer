@@ -1,5 +1,14 @@
-﻿  MacroBlock.cpp
+﻿  ISlice.cpp
+  MacroBlock.cpp
+  PicParmSet.cpp
   Residual.cpp
+D:\workspace\VS\avc_analyzer\AVC\Residual.cpp(30,6): warning C4101: “y”: 未引用的局部变量
+D:\workspace\VS\avc_analyzer\AVC\Residual.cpp(31,6): warning C4101: “subX”: 未引用的局部变量
+D:\workspace\VS\avc_analyzer\AVC\Residual.cpp(29,6): warning C4101: “x”: 未引用的局部变量
+D:\workspace\VS\avc_analyzer\AVC\Residual.cpp(32,6): warning C4101: “subY”: 未引用的局部变量
+  SliceHeader.cpp
+  avc_analyzer.cpp
+  nalu.cpp
   stream.cpp
   正在生成代码...
   AVC.vcxproj -> D:\workspace\VS\avc_analyzer\AVC\Debug\AVC.exe

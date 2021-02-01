@@ -16,6 +16,9 @@ class MacroBlock
 public:
 	MacroBlock(uint8_t* pSODB, uint8_t offset, uint8_t mbIdx, PicParmSet* pps);
 	~MacroBlock();
+	uint8_t GetCbpLuma();
+	uint8_t GetCbpChroma();
+	PicParmSet* GetPps();
 	int ParseMacroBlock();
 private:
 	uint8_t *pSODB;

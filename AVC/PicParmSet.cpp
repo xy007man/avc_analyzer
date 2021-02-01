@@ -64,3 +64,8 @@ bool PicParmSet::GetTransform8x8ModeFlag()
 {
 	return false;
 }
+
+bool PicParmSet::GetEntropyCodingModeFlag()
+{
+	return ppsFlag.entropyCodingModeFlag;
+}

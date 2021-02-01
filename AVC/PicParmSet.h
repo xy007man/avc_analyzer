@@ -27,6 +27,7 @@ public:
 	bool GetRedundantPicCntPresentFlag();
 	bool GetPicOrderPresentFlag();
 	bool GetTransform8x8ModeFlag();
+	bool GetEntropyCodingModeFlag();
 private:
 	uint8_t ppsId;
 	uint8_t spsId;

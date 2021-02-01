@@ -20,6 +20,7 @@ public:
 	~Residual();
 
 	int ParseMacroBlockResidual();
+	int ParseLumaResidual(uint8_t cbpLuma);
 private:
 	MacroBlock* macroBlock;
 	uint8_t* pSODB;
