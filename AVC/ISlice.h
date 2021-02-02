@@ -12,6 +12,7 @@ public:
 	ISlice(uint8_t *pSODB, SeqParmSet *sps, PicParmSet *pps, int naulType);
 	~ISlice();
 	int ParseSlice();
+	SeqParmSet* GetSps();
 private:
 	uint8_t *pSODB;
 	int naulType;

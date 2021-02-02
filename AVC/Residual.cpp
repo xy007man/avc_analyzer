@@ -24,6 +24,8 @@ int Residual::ParseMacroBlockResidual()
 	return 0;
 }
 
+
+
 int Residual::ParseLumaResidual(uint8_t cbpLuma)
 {
 	int x;
@@ -33,16 +35,18 @@ int Residual::ParseLumaResidual(uint8_t cbpLuma)
 	int idx8x8;
 	for (int y = 0; y < 4; y += 2) {
 		for (int x = 0; x < 4; x += 2) {
+			// 16x16 -> 4 * 8x8
 			if (macroBlock->GetPps()->GetEntropyCodingModeFlag()) {
 				// cavac
 			}
 			else {
-				// (0, 0) (2, 0) (0, 2) (2, 2)
+				// (0, 0) (2, 0) (0, 2) (2, 2) 8x8 -> 4 * 4x4
 				for (int subY = y; subY < y + 2; subY++) {
 					for (int subX = x; subX < x + 2; subX++) {
 						idx8x8 = y + x / 2; // 8x8¿éµÄË÷Òý
 						if (cbpLuma & (1 << idx8x8)) {
 							this->lumaResidual[subX][subY].emptyBlock = false;
+							GetLuma4x4Coeffs(x, y);
 						}
 						else {
 							this->lumaResidual[subX][subY].emptyBlock = true;
@@ -54,4 +58,15 @@ int Residual::ParseLumaResidual(uint8_t cbpLuma)
 	}
 
 	return 0;
+}
+
+int Residual::GetLuma4x4Coeffs(int x, int y)
+{
+	int nC = macroBlock->GetNumberCurrent(x, y);
+	return 0;
+}
+
+int Residual::GetSubBlockNumCoeff(int subX, int subY)
+{
+	return this->lumaResidual[subX][subY].numCoeff;
 }

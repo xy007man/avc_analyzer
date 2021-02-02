@@ -1,9 +1,10 @@
 #include "MacroBlock.h"
 #include "PicParmSet.h"
 #include "Residual.h"
+#include "ISlice.h"
 #include "utils.h"
 
-MacroBlock::MacroBlock(uint8_t* pSODB, uint8_t mbIdx, uint8_t offset, PicParmSet* pps)
+MacroBlock::MacroBlock(uint8_t* pSODB, uint8_t mbIdx, uint8_t offset, PicParmSet* pps, ISlice *slice)
 {
 	this->pSODB = pSODB;
 	this->byteOffset = offset / 8;
@@ -11,6 +12,7 @@ MacroBlock::MacroBlock(uint8_t* pSODB, uint8_t mbIdx, uint8_t offset, PicParmSet
 	this->pps = pps;
 	this->mbIdx = mbIdx;
 	this->mbSize = offset;
+	this->slice = slice;
 }
 
 MacroBlock::~MacroBlock()
@@ -50,6 +52,7 @@ int MacroBlock::ParseMacroBlock()
 		if (pps->GetTransform8x8ModeFlag()) {
 			transformSize8x8Flag = GetBitByPos(pSODB, byteOffset, bitOffset);
 		}
+		// Ã¿¸öºê¿é16x16£¬4x4 or 8x8 ±àÂë
 		if (transformSize8x8Flag) {
 			// Intra 8x8
 			intraPred = new IntraPred[4];
@@ -95,3 +98,88 @@ int MacroBlock::ParseMacroBlock()
 
 	return mbSize;
 }
+
+int MacroBlock::GetNumberCurrent(int subX, int subY)
+{
+	int nC = 0;
+	int topIdx;
+	int leftIdx;
+	int topNum = 0;
+	int leftNum = 0;
+
+	bool availableTop = false;
+	bool availableLeft = false;
+
+	GetNeighborAvailable(subX, subY, topIdx, leftIdx, availableTop, availableLeft);
+	if (!availableTop && !availableLeft) {
+		return 0;
+	}
+
+	if (availableLeft) {
+		nC = leftNum = GetLeftNeighborCoeff(leftIdx, subX, subY);
+	}
+	if (availableTop) {
+		nC = topNum = GetTopNeighborCoeff(topIdx, subX, subY);
+	}
+	if (availableTop && availableLeft) {
+		return (leftNum + topNum + 1) >> 1;
+	}
+
+	return nC;
+}
+
+void MacroBlock::GetNeighborAvailable(int x, int y, int &topIdx, int &leftIdx, bool& availableTop, bool& availableLeft)
+{
+	int mbIdx = this->mbIdx;
+	uint16_t picWidthInMBs = slice->GetSps()->GetPicWidthInMBs();
+	uint16_t picHeightInMBs = slice->GetSps()->GetPicHeightInMBs();
+
+	bool isLeftEdge = (mbIdx % picWidthInMBs) == 0;
+	bool isTopEdge = mbIdx < picWidthInMBs;
+
+	if (!isTopEdge) {
+		availableTop = true;
+		topIdx = mbIdx - picWidthInMBs;
+	}
+	else {
+		if (y == 0) {
+			availableTop = false;
+		}
+		else {
+			availableTop = true;
+			topIdx = mbIdx;
+		}
+	}
+
+	if (!isLeftEdge) {
+		availableLeft = true;
+		leftIdx = mbIdx - 1;
+	}
+	else {
+		if (x == 0) {
+			availableLeft = false;
+		}
+		else {
+			availableLeft = true;
+			leftIdx = mbIdx;
+		}
+	}
+}
+
+int MacroBlock::GetTopNeighborCoeff(int topIdx, int subX, int subY)
+{
+	if (topIdx == mbIdx) {
+		return residual->GetSubBlockNumCoeff(subX, subY - 1);
+	}
+
+	return 0;
+}
+
+int MacroBlock::GetLeftNeighborCoeff(int leftIdx, int subX, int subY)
+{
+	if (leftIdx == mbIdx) {
+		return residual->GetSubBlockNumCoeff(subX - 1, subY);
+	}
+	return 0;
+}
+

@@ -21,6 +21,8 @@ public:
 
 	int ParseMacroBlockResidual();
 	int ParseLumaResidual(uint8_t cbpLuma);
+	int GetLuma4x4Coeffs(int x, int y);
+	int GetSubBlockNumCoeff(int sub_x, int sub_y);
 private:
 	MacroBlock* macroBlock;
 	uint8_t* pSODB;
