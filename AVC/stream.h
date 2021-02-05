@@ -5,7 +5,7 @@
 #include <cstdio>
 #include "SeqParmSet.h"
 #include "PicParmSet.h"
-#include "ISlice.h"
+#include "Slice.h"
 
 class StreamFile
 {
@@ -20,7 +20,7 @@ private:
 	std::vector<uint8_t> nalu;
 	SeqParmSet *sps;
 	PicParmSet* pps;
-	ISlice* iSlice;
+	Slice* iSlice;
 };
 
 #endif

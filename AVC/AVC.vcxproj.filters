@@ -25,6 +25,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Cavlc">
+      <UniqueIdentifier>{d82f445d-81dd-4015-a30f-58b9b159d7df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stream.cpp">
@@ -45,9 +48,6 @@
     <ClCompile Include="PicParmSet.cpp">
       <Filter>Stream</Filter>
     </ClCompile>
-    <ClCompile Include="ISlice.cpp">
-      <Filter>Slice</Filter>
-    </ClCompile>
     <ClCompile Include="SliceHeader.cpp">
       <Filter>Slice</Filter>
     </ClCompile>
@@ -56,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="Residual.cpp">
       <Filter>Residual</Filter>
+    </ClCompile>
+    <ClCompile Include="Slice.cpp">
+      <Filter>Slice</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,9 +74,6 @@
     <ClInclude Include="SeqParmSet.h">
       <Filter>Stream</Filter>
     </ClInclude>
-    <ClInclude Include="ISlice.h">
-      <Filter>Slice</Filter>
-    </ClInclude>
     <ClInclude Include="SliceHeader.h">
       <Filter>Slice</Filter>
     </ClInclude>
@@ -85,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="Residual.h">
       <Filter>Residual</Filter>
+    </ClInclude>
+    <ClInclude Include="Slice.h">
+      <Filter>Slice</Filter>
+    </ClInclude>
+    <ClInclude Include="cavlc.h">
+      <Filter>Cavlc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

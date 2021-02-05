@@ -1,4 +1,5 @@
 #include "Residual.h"
+#include "cavlc.h"
 
 Residual::Residual(uint8_t* pSODB, uint8_t offset, MacroBlock* macroBlock)
 {
@@ -28,11 +29,9 @@ int Residual::ParseMacroBlockResidual()
 
 int Residual::ParseLumaResidual(uint8_t cbpLuma)
 {
-	int x;
-	int y;
-	int subX;
-	int subY;
+
 	int idx8x8;
+
 	for (int y = 0; y < 4; y += 2) {
 		for (int x = 0; x < 4; x += 2) {
 			// 16x16 -> 4 * 8x8
@@ -46,7 +45,9 @@ int Residual::ParseLumaResidual(uint8_t cbpLuma)
 						idx8x8 = y + x / 2; // 8x8¿éµÄË÷Òý
 						if (cbpLuma & (1 << idx8x8)) {
 							this->lumaResidual[subX][subY].emptyBlock = false;
-							GetLuma4x4Coeffs(x, y);
+							if (GetLuma4x4Coeffs(subX, subY) < 0) {
+								return -1;
+							}
 						}
 						else {
 							this->lumaResidual[subX][subY].emptyBlock = true;
@@ -60,9 +61,32 @@ int Residual::ParseLumaResidual(uint8_t cbpLuma)
 	return 0;
 }
 
-int Residual::GetLuma4x4Coeffs(int x, int y)
+int Residual::GetLuma4x4Coeffs(int subX, int subY)
 {
-	int nC = macroBlock->GetNumberCurrent(x, y);
+	uint8_t mbType = macroBlock->GetMbType();
+	uint8_t blockType = (mbType == IPCM || mbType == I16MB) ? LUMA_INTRA16x16AC : LUMA;
+	int maxCoeffNum = 0;
+	int numCoeffVlcIdx = 0;
+	int prefixLength = 0;
+	int suffixLength = 0;
+	int levelPrefix = 0;
+	int levelSuffix = 0;
+	int levelSuffixSize = 0;
+	int levelCode = 0;
+	
+	switch (blockType) {
+		case LUMA:
+			maxCoeffNum = 16;
+
+		case LUMA_INTRA16x16AC:
+			break;
+		case LUMA_INTRA16x16DC:
+			break;
+		default:
+			break;
+	}
+
+	int nC = macroBlock->GetNumberCurrent(subX, subY);
 	return 0;
 }
 

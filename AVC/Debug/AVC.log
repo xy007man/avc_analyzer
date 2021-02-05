@@ -1,12 +1,5 @@
-﻿  ISlice.cpp
-  MacroBlock.cpp
-D:\workspace\VS\avc_analyzer\AVC\MacroBlock.cpp(107,6): warning C4101: “topNum”: 未引用的局部变量
-D:\workspace\VS\avc_analyzer\AVC\MacroBlock.cpp(108,6): warning C4101: “leftNum”: 未引用的局部变量
-  Residual.cpp
-D:\workspace\VS\avc_analyzer\AVC\Residual.cpp(32,6): warning C4101: “y”: 未引用的局部变量
-D:\workspace\VS\avc_analyzer\AVC\Residual.cpp(33,6): warning C4101: “subX”: 未引用的局部变量
-D:\workspace\VS\avc_analyzer\AVC\Residual.cpp(31,6): warning C4101: “x”: 未引用的局部变量
-D:\workspace\VS\avc_analyzer\AVC\Residual.cpp(34,6): warning C4101: “subY”: 未引用的局部变量
+﻿  Slice.cpp
+  SliceHeader.cpp
   avc_analyzer.cpp
   stream.cpp
   正在生成代码...

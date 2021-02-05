@@ -54,3 +54,8 @@ int SliceHeader::ParseSlice()
 
 	return bytePos * 8 + bitPos;
 }
+
+uint8_t SliceHeader::GetSliceType()
+{
+	return this->sliceType;
+}

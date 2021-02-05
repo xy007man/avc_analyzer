@@ -1,10 +1,10 @@
 #include "MacroBlock.h"
 #include "PicParmSet.h"
 #include "Residual.h"
-#include "ISlice.h"
+#include "Slice.h"
 #include "utils.h"
 
-MacroBlock::MacroBlock(uint8_t* pSODB, uint8_t mbIdx, uint8_t offset, PicParmSet* pps, ISlice *slice)
+MacroBlock::MacroBlock(uint8_t* pSODB, uint8_t mbIdx, uint8_t offset, PicParmSet* pps, Slice *slice)
 {
 	this->pSODB = pSODB;
 	this->byteOffset = offset / 8;
@@ -34,6 +34,11 @@ uint8_t MacroBlock::GetCbpLuma()
 uint8_t MacroBlock::GetCbpChroma()
 {
 	return this->cbpChroma;
+}
+
+uint8_t MacroBlock::GetMbType()
+{
+	return this->mbType;
 }
 
 PicParmSet* MacroBlock::GetPps()
@@ -89,6 +94,7 @@ int MacroBlock::ParseMacroBlock()
 	}
 
 	if (cbpLuma > 0 || cbpChroma > 0 || (mbType > 0 && mbType < 25)) {
+		InterpretMbMode();
 		mbQpDelta = GetSECode(pSODB, byteOffset, bitOffset);
 		residual = new Residual(pSODB, byteOffset * 8 + bitOffset, this);
 		residual->ParseMacroBlockResidual();
@@ -181,5 +187,27 @@ int MacroBlock::GetLeftNeighborCoeff(int leftIdx, int subX, int subY)
 		return residual->GetSubBlockNumCoeff(subX - 1, subY);
 	}
 	return 0;
+}
+
+void MacroBlock::InterpretMbMode()
+{
+	uint8_t sliceType = slice->GetSliceHeader()->GetSliceType();
+
+	switch (sliceType)
+	{
+		case SLICE_TYPE_I:
+			if (mbType == 0) {
+				mbType = I4MB;
+			}
+			else if (mbType == 25) {
+				mbType = IPCM;
+			}
+			else {
+				mbType = I16MB;
+			}
+			break;
+		default:
+			break;
+	}
 }
 

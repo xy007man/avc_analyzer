@@ -49,7 +49,7 @@ int StreamFile::ParseBitStream() {
 					nalu.ParsePicParmSet(pps);
 					break;
 				case 5:
-					iSlice = new ISlice(nalu.GetSODB(), sps, pps, naulType);
+					iSlice = new Slice(nalu.GetSODB(), sps, pps, naulType);
 					iSlice->ParseSlice();
 					break;
 				default:

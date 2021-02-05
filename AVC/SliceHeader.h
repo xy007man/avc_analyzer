@@ -3,6 +3,14 @@
 #include "SeqParmSet.h"
 #include "PicParmSet.h"
 
+enum SliceType {
+	SLICE_TYPE_P = 0,
+	SLICE_TYPE_B,
+	SLICE_TYPE_I,
+	SLICE_TYPE_SP,
+	SLICE_TYPE_SI
+};
+
 struct SliceHeaderFlag {
 	uint32_t fieldPicFlag : 1;
 	uint32_t bottomFieldFlag : 1;
@@ -16,7 +24,7 @@ public:
 	SliceHeader(uint8_t* pSODB, SeqParmSet* sps, PicParmSet* pps, int naluType);
 	~SliceHeader();
 	int ParseSlice();
-
+	uint8_t GetSliceType();
 private:
 	uint8_t *pSODB;
 	int naluType;

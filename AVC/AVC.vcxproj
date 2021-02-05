@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="avc_analyzer.cpp" />
-    <ClCompile Include="ISlice.cpp" />
+    <ClCompile Include="Slice.cpp" />
     <ClCompile Include="MacroBlock.cpp" />
     <ClCompile Include="nalu.cpp" />
     <ClCompile Include="PicParmSet.cpp" />
@@ -151,7 +151,8 @@
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ISlice.h" />
+    <ClInclude Include="cavlc.h" />
+    <ClInclude Include="Slice.h" />
     <ClInclude Include="MacroBlock.h" />
     <ClInclude Include="nalu.h" />
     <ClInclude Include="PicParmSet.h" />
